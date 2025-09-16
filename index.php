@@ -34,9 +34,9 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-12" style="display: flex; align-items: center; justify-content: space-between;">
-            <div class="site-logo" data-aos="slide" style="margin-right: 24px;"><a href="index.html">Sweet Peach</a></div>
+            <div class="site-logo" data-aos="slide" style="margin-right: 24px;"><a href="index.php">Sweet Peach</a></div>
             <div style="display: flex; align-items: center; gap: 600px;">
-              <button id="bookingBtn" style="border:2px solid #000; background:transparent; color:#000; border-radius:2px; padding:8px 28px; margin:0; font-weight:700; cursor:pointer; transition:background 0.2s, color 0.2s, border-color 0.2s; text-transform:uppercase; letter-spacing:1px; font-size:16px; min-width:120px;">Book Your Stay</button>
+              <button id="bookingBtn" style="border:2px solid #000; background:transparent; color:#000; border-radius:2px; padding:8px 28px; margin:0; font-weight:700; cursor:pointer; transition:background 0.2s, color 0.2s, border-color 0.2s; text-transform:uppercase; letter-spacing:1px; font-size:16px; min-width:120px;" onclick="window.location.href='booking.php'">Book Your Stay</button>
               <div class="site-menu-toggle js-site-menu-toggle"  data-aos="slide">
 				  <span></span>
 				  <span></span>
@@ -54,12 +54,14 @@
                   <div class="row full-height align-items-center">
                     <div class="col-md-6 mx-auto">
                       <ul class="list-unstyled menu">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="rooms.html">Rooms</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="events.html">Gallery</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        
+                        <li class="active"><a href="index.php">Home</a></li>
+                        <li><a href="booking.php">Rooms</a></li>
+                        <li><a href="aboutus.php">About Us</a></li>
+                        <li><a href="events.php">Gallery</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
+                        <li><a href="register.php">Register</a></li>
+                        <li><a href="login.php">Login</a></li>
+
                       </ul>
                     </div>
                   </div>
@@ -98,7 +100,7 @@
         this.style.background = 'transparent';
       });
       bookingBtn.addEventListener('click', function() {
-        window.location.href = 'reservation.html';
+  window.location.href = 'booking.php';
       });
       window.addEventListener('scroll', function() {
         var header = document.querySelector('.site-header');
@@ -154,7 +156,7 @@
 Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, and warm hospitality come together. At our hotel, every moment is designed to give you comfort, relaxation, and unforgettable memories.
 </p>
 
-            <p><a href="#" class="btn btn-primary text-white py-2 mr-3">Learn More</a> <span class="mr-3 font-family-serif">
+            <p><a href="aboutus.php" class="btn btn-primary text-white py-2 mr-3">Learn More</a> <span class="mr-3 font-family-serif">
           
         </div>
       </div>
@@ -170,9 +172,9 @@ Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, 
         </div>
         <div class="row">
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <a href="#" class="room">
+            <a class="room">
               <figure class="img-wrap">
-                <img src="images/img_1.jpg" alt="Free website template" class="img-fluid mb-3">
+                <img src="images/img_1.jpg" alt="" class="img-fluid mb-3">
               </figure>
               <div class="p-3 text-center room-info">
                 <h2>Single Room</h2>
@@ -182,9 +184,9 @@ Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, 
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <a href="#" class="room">
+            <a  class="room">
               <figure class="img-wrap">
-                <img src="images/img_2.jpg" alt="Free website template" class="img-fluid mb-3">
+                <img src="images/img_2.jpg" alt="" class="img-fluid mb-3">
               </figure>
               <div class="p-3 text-center room-info">
                 <h2>Family Room</h2>
@@ -194,9 +196,9 @@ Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, 
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <a href="#" class="room">
+            <a  class="room">
               <figure class="img-wrap">
-                <img src="images/img_3.jpg" alt="Free website template" class="img-fluid mb-3">
+                <img src="images/img_3.jpg" alt="" class="img-fluid mb-3">
               </figure>
               <div class="p-3 text-center room-info">
                 <h2>Presidential Room</h2>
@@ -236,118 +238,39 @@ Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, 
                 <div class="col-md-6">
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$5.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Egg Hoppers&nbsp; &nbsp;</a></h3>
+                    <h3 class="text-white"><a class="text-white">Egg Hoppers&nbsp; &nbsp;</a></h3>
                     <p class="text-white text-opacity-7">Crispy-edged, soft rice flour pancakes with a perfectly cooked egg in the center. A classic Sri Lankan treat!</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$8.50</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Kottu</a></h3>
+                    <h3 class="text-white"><a  class="text-white">Kottu</a></h3>
                     <p class="text-white text-opacity-7">Chopped roti stir-fried with vegetables, spices, and your choice of meat—a flavorful Sri Lankan street food favorite!</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$10.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Fish Ambul Thiyal</a></h3>
+                    <h3 class="text-white"><a  class="text-white">Fish Ambul Thiyal</a></h3>
                     <p class="text-white text-opacity-7">Tangy, spicy fish curry made with goraka (a souring fruit) and traditional Sri Lankan spices.</p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$16.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">French Toast Combo</a></h3>
+                    <h3 class="text-white"><a  class="text-white">French Toast Combo</a></h3>
                     <p class="text-white text-opacity-7">Golden, buttery French toast served with fresh fruits and a drizzle of syrup—a sweet and satisfying treat!</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$8.35</span>
-                    <h3 class="text-white"><a href="#" class="text-white">String Hoppers&nbsp;</a></h3>
+                    <h3 class="text-white"><a  class="text-white">String Hoppers&nbsp;</a></h3>
                     <p class="text-white text-opacity-7">Steamed rice noodle nests, light and fluffy, perfect with curry or sambol for an authentic Sri Lankan meal.</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$7.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Chorizo &amp; Egg Omelet</a></h3>
+                    <h3 class="text-white"><a  class="text-white">Chorizo &amp; Egg Omelet</a></h3>
                     <p class="text-white text-opacity-7">Fluffy eggs cooked with spicy chorizo, creating a hearty and flavorful start to your day.</p>
                   </div>
                 </div>
               </div>
-              
-
-            </div> <!-- .tab-pane -->
-
-            <div class="tab-pane fade text-left" id="desserts" role="tabpanel" aria-labelledby="desserts-tab">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$11.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Banana Split</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$72.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Sticky Toffee Pudding</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$26.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Pecan</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$42.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Apple Strudel</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$7.35</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Pancakes</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$22.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Ice Cream Sundae</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                </div>
-              </div>
-            </div> <!-- .tab-pane -->
-            <div class="tab-pane fade text-left" id="drinks" role="tabpanel" aria-labelledby="drinks-tab">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$32.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Spring Water</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$14.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Coke, Diet Coke, Coke Zero</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$93.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Orange Fanta</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$18.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Lemonade, Lemon Squash</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$38.35</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Sparkling Mineral Water</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="food-menu mb-5">
-                    <span class="d-block text-primary h4 mb-3">$69.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">Lemon, Lime &amp; Bitters</a></h3>
-                    <p class="text-white text-opacity-7">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                </div>
-              </div>
-            </div> <!-- .tab-pane -->
+            </div>
           </div>
         </div>
       </div>
@@ -369,10 +292,10 @@ Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, 
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="100">
 
             <div class="media media-custom d-block mb-4 h-100">
-              <a href="" class="mb-4 d-block"><img src="images/sigirya.jpg" alt="Image placeholder" class="img-fluid"></a>
+              <a  class="mb-4 d-block"><img src="images/sigirya.jpg" alt="Image placeholder" class="img-fluid"></a>
               <div class="media-body">
                 <span class="meta-post">~4 hours trip&nbsp;</span>
-                <h2 class="mt-0 mb-3"><a href="#">Sigirya</a></h2>
+                <h2 class="mt-0 mb-3"><a>Sigirya</a></h2>
                 <p>Discover the ancient rock fortress of Sigiriya, a UNESCO World Heritage site, famous for its stunning views, historic frescoes, and rich cultural heritage.</p>
               </div>
             </div>
@@ -380,21 +303,21 @@ Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, 
           </div>
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="200">
             <div class="media media-custom d-block mb-4 h-100">
-              <a href="#" class="mb-4 d-block"><img src="images/elephant.jpg" alt="Image placeholder" class="img-fluid"></a>
+              <a  class="mb-4 d-block"><img src="images/elephant.jpg" alt="Image placeholder" class="img-fluid"></a>
               <div class="media-body">
                 <p> <span class="meta-post">~2 hours trip</span> </p>
                 
-<h2 class="mt-0 mb-3"><a href="#">Pinnawala Elephant Orphanage</a></h2>
+<h2 class="mt-0 mb-3"><a>Pinnawala Elephant Orphanage</a></h2>
                 <p>Visit the famous Pinnawala Elephant Orphanage to see rescued elephants up close, watch them bathe in the river, and learn about Sri Lanka’s conservation efforts.</p>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="300">
             <div class="media media-custom d-block mb-4 h-100">
-              <a href="#" class="mb-4 d-block"><img src="images/mlbeach.jpg" alt="Image placeholder" class="img-fluid"></a>
+              <a class="mb-4 d-block"><img src="images/mlbeach.jpg" alt="Image placeholder" class="img-fluid"></a>
               <div class="media-body">
                 <span class="meta-post">~0.5 hours trip</span>
-                <h2 class="mt-0 mb-3"><a href="#">Mount Lavinia Beach</a></h2>
+                <h2 class="mt-0 mb-3"><a>Mount Lavinia Beach</a></h2>
                 <p>Mount Lavinia Beach offers golden sands, a refreshing sea breeze, and plenty of seaside restaurants to enjoy fresh seafood and stunning sunset views.</p>
               </div>
             </div>
@@ -421,18 +344,18 @@ Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, 
         <div class="row mb-4">
           <div class="col-md-3 mb-5">
             <ul class="list-unstyled link">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Terms &amp; Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-             <li><a href="#">Rooms</a></li>
+              <li><a href="aboutus.php">About Us</a></li>
+              
+              <li><a href="" >Privacy Policy</a></li>
+             <li><a href="booking.php">Rooms</a></li>
             </ul>
           </div>
           <div class="col-md-3 mb-5">
             <ul class="list-unstyled link">
-              <li><a href="">The Rooms &amp; Suites</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">Restaurant</a></li>
+              <li><a href="events.php">Our gallery</a></li>
+              
+              <li><a href="contact.php">Contact Us</a></li>
+              
             </ul>
           </div>
           <div class="col-md-3 mb-5 pr-md-5 contact-info">
@@ -441,7 +364,7 @@ Discover the charm of Sri Lanka in a place where golden beaches, lush greenery, 
           </div>
           <div class="col-md-3 mb-5">
             <p>Sign up for our newsletter</p>
-            <form action="#" class="footer-newsletter">
+            <form  class="footer-newsletter">
               <div class="form-group">
                 <input type="email" class="form-control" placeholder="Email...">
                 <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button><br>

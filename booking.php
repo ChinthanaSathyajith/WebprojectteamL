@@ -65,22 +65,93 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <link rel="stylesheet" href="css/style.css">
 </head>
 
+
+
 <body>
-    <!-- <header class="site-header js-site-header">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-6 col-lg-4 site-logo"><a href="index.php">Sweet Peach</a></div>
-                <div class="col-6 col-lg-8">
-                    <ul class="list-unstyled menu">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="rooms.php">Rooms</a></li>
-                        <li class="active"><a href="booking.php">Book a Room</a></li>
-                        <li><a href="logout.php">Logout</a></li>
-                    </ul>
-                </div>
+    <header class="site-header js-site-header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-12" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="site-logo" data-aos="slide" style="margin-right: 24px;"><a href="index.php">Sweet Peach</a></div>
+            <div style="display: flex; align-items: center; gap: 600px;">
+              <button id="bookingBtn" style="border:2px solid #000; background:transparent; color:#000; border-radius:2px; padding:8px 28px; margin:0; font-weight:700; cursor:pointer; transition:background 0.2s, color 0.2s, border-color 0.2s; text-transform:uppercase; letter-spacing:1px; font-size:16px; min-width:120px;" onclick="window.location.href='booking.php'">Book Your Stay</button>
+              <div class="site-menu-toggle js-site-menu-toggle"  data-aos="slide">
+				  <span></span>
+				  <span></span>
+				  <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
+          </div>
+          <div style="display:none"></div>
+            <div class="site-navbar js-site-navbar">
+              <nav role="navigation">
+                <div class="container">
+                  <div class="row full-height align-items-center">
+                    <div class="col-md-6 mx-auto">
+                      <ul class="list-unstyled menu">
+                        <li><a href="index.php">Home</a></li>
+                        <li class="active"><a href="booking.php">Rooms</a></li>
+                        <li><a href="aboutus.php">About Us</a></li>
+                        <li><a href="events.php">Gallery</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
+                        <li><a href="register.php">Register</a></li>
+                        <li><a href="login.php">Login</a></li>
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
         </div>
-    </header> -->
+      </div>
+    <script>
+      var bookingBtn = document.getElementById('bookingBtn');
+      function setBookingBtnColor(isScrolled) {
+        if (isScrolled) {
+          bookingBtn.style.borderColor = '#000';
+          bookingBtn.style.color = '#000';
+        } else {
+          bookingBtn.style.borderColor = '#fff';
+          bookingBtn.style.color = '#fff';
+        }
+      }
+      function setBookingBtnResponsive() {
+        if (window.innerWidth <= 600) {
+          bookingBtn.style.padding = '6px 12px';
+          bookingBtn.style.fontSize = '13px';
+          bookingBtn.style.minWidth = '90px';
+        } else {
+          bookingBtn.style.padding = '8px 28px';
+          bookingBtn.style.fontSize = '16px';
+          bookingBtn.style.minWidth = '120px';
+        }
+      }
+      bookingBtn.addEventListener('mouseover', function() {
+        this.style.background = 'rgba(0,0,0,0.08)';
+      });
+      bookingBtn.addEventListener('mouseout', function() {
+        this.style.background = 'transparent';
+      });
+      bookingBtn.addEventListener('click', function() {
+  window.location.href = 'booking.php';
+      });
+      window.addEventListener('scroll', function() {
+        var header = document.querySelector('.site-header');
+        setBookingBtnColor(header.classList.contains('scrolled'));
+      });
+      window.addEventListener('resize', setBookingBtnResponsive);
+      // Initial state
+      var header = document.querySelector('.site-header');
+      setBookingBtnColor(header.classList.contains('scrolled'));
+      setBookingBtnResponsive();
+    </script>
+    </header>
+   
 
     <section class="section booking-section">
         <div class="container">
