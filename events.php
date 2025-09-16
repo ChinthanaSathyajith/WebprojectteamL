@@ -62,7 +62,8 @@ session_start();
                     <li><a href="index.php">Home</a></li>
                     <li><a href="booking.php">Rooms</a></li>
                     <li><a href="aboutus.php">About Us</a></li>
-                    <li class="active"><a href="events.php">Gallery</a></li>
+                   <li class="active"><a href="events.php">Gallery</a></li>
+                    <li><a href="feedback.php">Feedbacks</a></li>                    
                     <li><a href="contact.php">Contact Us</a></li>
 
                     <?php

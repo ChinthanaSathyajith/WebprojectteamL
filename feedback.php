@@ -1,5 +1,4 @@
 <?php
-session_start();
 $conn = new mysqli("127.0.0.1", "root", "", "db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -21,9 +20,26 @@ $conn->close();
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sweet Peach - Feedback</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css"
+        href="//fonts.googleapis.com/css?family=|Roboto+Sans:400,700|Playfair+Display:400,700">
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" href="css/fancybox.min.css">
+
+    <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="css/style.css">
     <style>
         .feedback-section {
@@ -57,21 +73,27 @@ $conn->close();
 </head>
 
 <body>
-    <!-- Navbar  -->
-    <!-- <header class="site-header js-site-header">
+
+  <header class="site-header js-site-header">
     <div class="container-fluid">
       <div class="row align-items-center">
         <div class="col-12" style="display: flex; align-items: center; justify-content: space-between;">
-          <div class="site-logo" data-aos="slide"><a href="index.php">Sweet Peach</a></div>
+          <div class="site-logo" data-aos="slide" style="margin-right: 24px;"><a href="index.php">Sweet Peach</a></div>
           <div style="display: flex; align-items: center; gap: 600px;">
             <button id="bookingBtn"
-              style="border:2px solid #000; background:transparent; color:#000; border-radius:2px; padding:8px 28px; font-weight:700; cursor:pointer;"
+              style="border:2px solid #000; background:transparent; color:#000; border-radius:2px; padding:8px 28px; margin:0; font-weight:700; cursor:pointer; transition:background 0.2s, color 0.2s, border-color 0.2s; text-transform:uppercase; letter-spacing:1px; font-size:16px; min-width:120px;"
               onclick="window.location.href='booking.php'">Book Your Stay</button>
             <div class="site-menu-toggle js-site-menu-toggle" data-aos="slide">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
           </div>
         </div>
+        <div style="display:none"></div>
         <div class="site-navbar js-site-navbar">
           <nav role="navigation">
             <div class="container">
@@ -82,16 +104,21 @@ $conn->close();
                     <li><a href="booking.php">Rooms</a></li>
                     <li><a href="aboutus.php">About Us</a></li>
                     <li><a href="events.php">Gallery</a></li>
+                    <li  class="active"><a href="feedback.php">Feedbacks</a></li>
                     <li><a href="contact.php">Contact Us</a></li>
-                    <li class="active"><a href="feedback.php">Feedback</a></li>
+
+
                     <?php
                     if (isset($_SESSION['user_id'])) {
-                        echo '<li><a href="logout.php">Logout</a></li>';
+                      echo (' <li><a href="logout.php">Logout</a></li>');
                     } else {
-                        echo '<li><a href="register.php">Register</a></li>';
-                        echo '<li><a href="login.php">Login</a></li>';
+                      echo ('<li><a href="register.php">Register</a></li>');
+                      echo (' <li><a href="login.php">Login</a></li>');
+
                     }
                     ?>
+
+
                   </ul>
                 </div>
               </div>
@@ -100,10 +127,77 @@ $conn->close();
         </div>
       </div>
     </div>
-  </header> -->
+    </div>
+    <script>
+      var bookingBtn = document.getElementById('bookingBtn');
+      function setBookingBtnColor(isScrolled) {
+        if (isScrolled) {
+          bookingBtn.style.borderColor = '#000';
+          bookingBtn.style.color = '#000';
+        } else {
+          bookingBtn.style.borderColor = '#fff';
+          bookingBtn.style.color = '#fff';
+        }
+      }
+      function setBookingBtnResponsive() {
+        if (window.innerWidth <= 600) {
+          bookingBtn.style.padding = '6px 12px';
+          bookingBtn.style.fontSize = '13px';
+          bookingBtn.style.minWidth = '90px';
+        } else {
+          bookingBtn.style.padding = '8px 28px';
+          bookingBtn.style.fontSize = '16px';
+          bookingBtn.style.minWidth = '120px';
+        }
+      }
+      bookingBtn.addEventListener('mouseover', function () {
+        this.style.background = 'rgba(0,0,0,0.08)';
+      });
+      bookingBtn.addEventListener('mouseout', function () {
+        this.style.background = 'transparent';
+      });
+      bookingBtn.addEventListener('click', function () {
+        window.location.href = 'booking.php';
+      });
+      window.addEventListener('scroll', function () {
+        var header = document.querySelector('.site-header');
+        setBookingBtnColor(header.classList.contains('scrolled'));
+      });
+      window.addEventListener('resize', setBookingBtnResponsive);
+      // Initial state
+      var header = document.querySelector('.site-header');
+      setBookingBtnColor(header.classList.contains('scrolled'));
+      setBookingBtnResponsive();
+    </script>
+  </header>
+  <!-- END head -->
 
-    <!-- Feedback Section -->
-    <div class="container feedback-section" style="margin-top: 50px;">
+  <section class="site-hero overlay" style="background-image: url(images/feedback.jpg)"
+    data-stellar-background-ratio="0.5">
+    <div class="container">
+      <div class="row site-hero-inner justify-content-center align-items-center">
+        <div class="col-md-10 text-center" data-aos="fade-up">
+          <span class="custom-caption text-uppercase text-white d-block mb-3">
+          We Value Your Feedback – Share Your Experience With Us
+          </span>
+          <h1 class="heading">Feedbacks</h1>
+
+        </div>
+      </div>
+    </div>
+
+    <a class="mouse smoothscroll" href="#next">
+      <div class="mouse-icon">
+        <span class="mouse-wheel"></span>
+      </div>
+    </a>
+  </section>
+  <!-- END section -->
+
+  
+
+    <section class="section">
+    <div class="container feedback-section">
         <h2 class="text-center mb-4">What our customers say</h2>
 
         <?php if (empty($feedbacks)): ?>
@@ -125,6 +219,7 @@ $conn->close();
             <button class="btn btn-primary mt-3" id="postFeedbackBtn">Post My Feedback</button>
         </div>
     </div>
+</section>
 
     <!-- ✅ Feedback Modal -->
     <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog">
@@ -148,7 +243,7 @@ $conn->close();
         </div>
     </div>
 
-    <!-- ✅ Footer (Copied from index.php) -->
+    
     <footer class="section footer-section">
         <div class="container">
             <div class="row mb-4">
@@ -201,7 +296,16 @@ $conn->close();
     </footer>
 
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/main.js"></script>
     <script>
         document.getElementById("postFeedbackBtn").addEventListener("click", function () {
             <?php if (!isset($_SESSION['user_id'])): ?>

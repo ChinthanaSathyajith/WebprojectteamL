@@ -93,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <li><a href="booking.php">Rooms</a></li>
                     <li><a href="aboutus.php">About Us</a></li>
                     <li><a href="events.php">Gallery</a></li>
+                    <li><a href="feedback.php">Feedbacks</a></li>                  
                     <li><a href="contact.php">Contact Us</a></li>
                     <?php
                     if (isset($_SESSION['user_id'])) {
