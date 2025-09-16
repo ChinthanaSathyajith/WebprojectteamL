@@ -1,3 +1,6 @@
+<?php
+// Add your PHP logic here if needed
+?>
 <!DOCTYPE HTML>
 <html>
 
