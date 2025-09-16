@@ -1,4 +1,5 @@
 <?php
+session_start();
 $conn = new mysqli("127.0.0.1", "root", "", "db");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -242,6 +243,18 @@ $conn->close();
             </div>
         </div>
     </div>
+    <section class="section bg-image overlay" style="background-image: url('images/feedback.jpg');">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-6 text-center mb-4 mb-md-0 text-md-left" data-aos="fade-up">
+          <h2 class="text-white font-weight-bold">A Best Place To Stay. Reserve Now!</h2>
+        </div>
+        <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
+          <a href="booking.php" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
     
     <footer class="section footer-section">
