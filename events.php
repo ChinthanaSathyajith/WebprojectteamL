@@ -1,5 +1,6 @@
 <?php
-// Add your PHP logic here if needed
+session_start();
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -33,46 +34,56 @@
 <body>
 
   <header class="site-header js-site-header">
-      <div class="container-fluid">
-        <div class="row align-items-center">
-          <div class="col-12" style="display: flex; align-items: center; justify-content: space-between;">
-            <div class="site-logo" data-aos="slide" style="margin-right: 24px;"><a href="index.php">Sweet Peach</a></div>
-            <div style="display: flex; align-items: center; gap: 600px;">
-              <button id="bookingBtn" style="border:2px solid #000; background:transparent; color:#000; border-radius:2px; padding:8px 28px; margin:0; font-weight:700; cursor:pointer; transition:background 0.2s, color 0.2s, border-color 0.2s; text-transform:uppercase; letter-spacing:1px; font-size:16px; min-width:120px;" onclick="window.location.href='booking.php'">Book Your Stay</button>
-              <div class="site-menu-toggle js-site-menu-toggle"  data-aos="slide">
-				  <span></span>
-				  <span></span>
-				  <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-          <div style="display:none"></div>
-            <div class="site-navbar js-site-navbar">
-              <nav role="navigation">
-                <div class="container">
-                  <div class="row full-height align-items-center">
-                    <div class="col-md-6 mx-auto">
-                      <ul class="list-unstyled menu">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="booking.php">Rooms</a></li>
-                        <li><a href="aboutus.php">About Us</a></li>
-                        <li class="active"><a href="events.php">Gallery</a></li>
-                        <li><a href="contact.php">Contact Us</a></li>
-                        <li><a href="register.php">Register</a></li>
-                        <li><a href="login.php">Login</a></li>
-
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </nav>
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-12" style="display: flex; align-items: center; justify-content: space-between;">
+          <div class="site-logo" data-aos="slide" style="margin-right: 24px;"><a href="index.php">Sweet Peach</a></div>
+          <div style="display: flex; align-items: center; gap: 600px;">
+            <button id="bookingBtn"
+              style="border:2px solid #000; background:transparent; color:#000; border-radius:2px; padding:8px 28px; margin:0; font-weight:700; cursor:pointer; transition:background 0.2s, color 0.2s, border-color 0.2s; text-transform:uppercase; letter-spacing:1px; font-size:16px; min-width:120px;"
+              onclick="window.location.href='booking.php'">Book Your Stay</button>
+            <div class="site-menu-toggle js-site-menu-toggle" data-aos="slide">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
           </div>
         </div>
+        <div style="display:none"></div>
+        <div class="site-navbar js-site-navbar">
+          <nav role="navigation">
+            <div class="container">
+              <div class="row full-height align-items-center">
+                <div class="col-md-6 mx-auto">
+                  <ul class="list-unstyled menu">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="booking.php">Rooms</a></li>
+                    <li><a href="aboutus.php">About Us</a></li>
+                    <li class="active"><a href="events.php">Gallery</a></li>
+                    <li><a href="contact.php">Contact Us</a></li>
+
+                    <?php
+                    if (isset($_SESSION['user_id'])) {
+                      echo (' <li><a href="logout.php">Logout</a></li>');
+                    } else {
+                      echo ('<li><a href="register.php">Register</a></li>');
+                      echo (' <li><a href="login.php">Login</a></li>');
+
+                    }
+                    ?>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
       </div>
+    </div>
+    </div>
     <script>
       var bookingBtn = document.getElementById('bookingBtn');
       function setBookingBtnColor(isScrolled) {
@@ -95,16 +106,16 @@
           bookingBtn.style.minWidth = '120px';
         }
       }
-      bookingBtn.addEventListener('mouseover', function() {
+      bookingBtn.addEventListener('mouseover', function () {
         this.style.background = 'rgba(0,0,0,0.08)';
       });
-      bookingBtn.addEventListener('mouseout', function() {
+      bookingBtn.addEventListener('mouseout', function () {
         this.style.background = 'transparent';
       });
-      bookingBtn.addEventListener('click', function() {
-  window.location.href = 'booking.php';
+      bookingBtn.addEventListener('click', function () {
+        window.location.href = 'booking.php';
       });
-      window.addEventListener('scroll', function() {
+      window.addEventListener('scroll', function () {
         var header = document.querySelector('.site-header');
         setBookingBtnColor(header.classList.contains('scrolled'));
       });
@@ -114,7 +125,7 @@
       setBookingBtnColor(header.classList.contains('scrolled'));
       setBookingBtnResponsive();
     </script>
-    </header>
+  </header>
   <!-- END head -->
 
   <section class="site-hero inner-page overlay" style="background-image: url(images/hero_4.jpg)"
@@ -215,7 +226,7 @@
         </div>
       </div>
 
-      
+
     </div>
   </section>
 
@@ -300,57 +311,61 @@
     </div>
   </section>
 
-<footer class="section footer-section">
-      <div class="container">
-        <div class="row mb-4">
-          <div class="col-md-3 mb-5">
-            <ul class="list-unstyled link">
-              <li><a href="aboutus.php">About Us</a></li>
-              
-              <li><a href="" >Privacy Policy</a></li>
-             <li><a href="booking.php">Rooms</a></li>
-            </ul>
-          </div>
-          <div class="col-md-3 mb-5">
-            <ul class="list-unstyled link">
-              <li><a href="events.php">Our gallery</a></li>
-              
-              <li><a href="contact.php">Contact Us</a></li>
-              
-            </ul>
-          </div>
-          <div class="col-md-3 mb-5 pr-md-5 contact-info">
-            <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span> No. 72, Ocean View Road, Mount Lavinia, Colombo, Sri Lanka</span></p>
-            <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span> (+94) 912225123</span></p>
-          </div>
-          <div class="col-md-3 mb-5">
-            <p>Sign up for our newsletter</p>
-            <form  class="footer-newsletter">
-              <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email...">
-                <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button><br>
-                <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> sweetpeach@gmail.com</span></p>
+  <footer class="section footer-section">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-3 mb-5">
+          <ul class="list-unstyled link">
+            <li><a href="aboutus.php">About Us</a></li>
 
-              </div>
-            </form>
-          </div>
+            <li><a href="">Privacy Policy</a></li>
+            <li><a href="booking.php">Rooms</a></li>
+          </ul>
         </div>
-        <div class="row pt-5">
-          <p class="col-md-6 text-left">
-            
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
-          </p>
-            
-          <p class="col-md-6 text-right social">
-            <a href="https://www.tripadvisor.com/"><span class="fa fa-tripadvisor"></span></a>
-            <a href="https://www.facebook.com/"><span class="fa fa-facebook"></span></a>
-            <a href="https://x.com/"><span class="fa fa-twitter"></span></a>
-            <a href="https://www.linkedin.com/home?originalSubdomain=lk"><span class="fa fa-linkedin"></span></a>
-            
-          </p>
+        <div class="col-md-3 mb-5">
+          <ul class="list-unstyled link">
+            <li><a href="events.php">Our gallery</a></li>
+
+            <li><a href="contact.php">Contact Us</a></li>
+
+          </ul>
+        </div>
+        <div class="col-md-3 mb-5 pr-md-5 contact-info">
+          <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span> No.
+              72, Ocean View Road, Mount Lavinia, Colombo, Sri Lanka</span></p>
+          <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span>
+              (+94) 912225123</span></p>
+        </div>
+        <div class="col-md-3 mb-5">
+          <p>Sign up for our newsletter</p>
+          <form class="footer-newsletter">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email...">
+              <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button><br>
+              <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span>
+                  sweetpeach@gmail.com</span></p>
+
+            </div>
+          </form>
         </div>
       </div>
-    </footer>
+      <div class="row pt-5">
+        <p class="col-md-6 text-left">
+
+          Copyright &copy;
+          <script>document.write(new Date().getFullYear());</script> All rights reserved
+        </p>
+
+        <p class="col-md-6 text-right social">
+          <a href="https://www.tripadvisor.com/"><span class="fa fa-tripadvisor"></span></a>
+          <a href="https://www.facebook.com/"><span class="fa fa-facebook"></span></a>
+          <a href="https://x.com/"><span class="fa fa-twitter"></span></a>
+          <a href="https://www.linkedin.com/home?originalSubdomain=lk"><span class="fa fa-linkedin"></span></a>
+
+        </p>
+      </div>
+    </div>
+  </footer>
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
