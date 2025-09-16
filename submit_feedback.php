@@ -9,8 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $feedback = trim($_POST['feedback_text']);
 
     if (!empty($feedback)) {
-        $conn = new mysqli("127.0.0.1", "root", "", "db");
-        if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+        require_once 'db_connect.php';
 
         $stmt = $conn->prepare("INSERT INTO feedback (user_id, feedback_text) VALUES (?, ?)");
         $stmt->bind_param("is", $_SESSION['user_id'], $feedback);

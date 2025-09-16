@@ -9,10 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 $message = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $conn = new mysqli("127.0.0.1", "root", "", "db");
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+  require_once 'db_connect.php';
 
   $user_id = $_SESSION['user_id'];
   $full_name = $_POST['full_name'];
