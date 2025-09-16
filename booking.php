@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="col-md-6 mx-auto">
                       <ul class="list-unstyled menu">
                         <li><a href="index.php">Home</a></li>
-                        <li class="active"><a href="booking.php">Rooms</a></li>
+                        <li  class="active"><a href="booking.php">Rooms</a></li>
                         <li><a href="aboutus.php">About Us</a></li>
                         <li><a href="events.php">Gallery</a></li>
                         <li><a href="contact.php">Contact Us</a></li>
@@ -151,7 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       setBookingBtnResponsive();
     </script>
     </header>
-   
 
     <section class="section booking-section">
         <div class="container">
