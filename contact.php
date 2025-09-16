@@ -379,43 +379,43 @@
               <h2 class="text-white font-weight-bold">A Best Place To Stay. Reserve Now!</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
-              <a href="reservation.html" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
+              <a href="booking.php" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
             </div>
           </div>
         </div>
       </section>
 
-    <footer class="section footer-section">
+<footer class="section footer-section">
       <div class="container">
         <div class="row mb-4">
           <div class="col-md-3 mb-5">
             <ul class="list-unstyled link">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Terms &amp; Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-             <li><a href="#">Rooms</a></li>
+              <li><a href="aboutus.php">About Us</a></li>
+              
+              <li><a href="" >Privacy Policy</a></li>
+             <li><a href="booking.php">Rooms</a></li>
             </ul>
           </div>
           <div class="col-md-3 mb-5">
             <ul class="list-unstyled link">
-              <li><a href="#">The Rooms &amp; Suites</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">Restaurant</a></li>
+              <li><a href="events.php">Our gallery</a></li>
+              
+              <li><a href="contact.php">Contact Us</a></li>
+              
             </ul>
           </div>
           <div class="col-md-3 mb-5 pr-md-5 contact-info">
-            <!-- <li>198 West 21th Street, <br> Suite 721 New York NY 10016</li> -->
             <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span> No. 72, Ocean View Road, Mount Lavinia, Colombo, Sri Lanka</span></p>
             <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span> (+94) 912225123</span></p>
-            <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> sweetpeach@gmail.com</span></p>
           </div>
           <div class="col-md-3 mb-5">
             <p>Sign up for our newsletter</p>
-            <form action="#" class="footer-newsletter">
+            <form  class="footer-newsletter">
               <div class="form-group">
                 <input type="email" class="form-control" placeholder="Email...">
-                <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button>
+                <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button><br>
+                <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> sweetpeach@gmail.com</span></p>
+
               </div>
             </form>
           </div>
@@ -425,7 +425,7 @@
             
             Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
           </p>
-
+            
           <p class="col-md-6 text-right social">
             <a href="https://www.tripadvisor.com/"><span class="fa fa-tripadvisor"></span></a>
             <a href="https://www.facebook.com/"><span class="fa fa-facebook"></span></a>
@@ -433,7 +433,6 @@
             <a href="https://www.linkedin.com/home?originalSubdomain=lk"><span class="fa fa-linkedin"></span></a>
             
           </p>
-            
         </div>
       </div>
     </footer>
