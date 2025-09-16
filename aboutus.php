@@ -164,9 +164,8 @@ session_start();
           <p class="mb-4">Welcome to Sweet Peach, a cozy getaway in the heart of Colombo. Blending modern comfort with
             warm hospitality, our hotel is designed to give you a peaceful retreat from the city buzz. Whether you’re
             here for business or leisure, every moment at Sweet Peach feels like home.</p>
-          <p><a href="#" class="btn btn-primary text-white py-2 mr-3">Learn More</a> <span
-              class="mr-3 font-family-serif"><em>or</em></span> <a href="" data-fancybox
-              class="text-uppercase letter-spacing-1">See video</a></p>
+          <p><a href="contact.php" class="btn btn-primary text-white py-2 mr-3">Learn More</a>
+              
         </div>
 
       </div>
