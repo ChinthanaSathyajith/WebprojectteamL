@@ -19,17 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $message = "Passwords do not match!";
   } else {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    $stmt = $conn->prepare("INSERT INTO users (fullname, phone, email, password) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $fullname, $phone, $email, $hashed_password);
+    $role = 'user';
+    $stmt = $conn->prepare("INSERT INTO users (fullname, phone, email, password, role) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $fullname, $phone, $email, $hashed_password, $role);
 
     if ($stmt->execute()) {
-      $message = "Registration successful! <a href='login.php'>Login here</a>";
+      $stmt->close();
+      $conn->close();
+      header("Location: register.php?msg=success");
+      exit();
     } else {
       $message = "Error: " . $stmt->error;
+      $stmt->close();
+      $conn->close();
     }
-
-    $stmt->close();
   }
 
   $conn->close();
@@ -162,7 +165,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <form action="register.php" method="post" class="bg-white p-md-5 p-4 mb-5 border">
             <h2 class="mb-4">Register</h2>
 
-            <?php if ($message != ""): ?>
+            <?php if (isset($_GET['msg']) && $_GET['msg'] === 'success'): ?>
+              <div class="alert alert-info">Registration successful! <a href='login.php'>Login here</a></div>
+            <?php elseif ($message != ""): ?>
               <div class="alert alert-info"><?php echo $message; ?></div>
             <?php endif; ?>
 

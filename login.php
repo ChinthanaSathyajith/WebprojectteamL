@@ -13,46 +13,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  // First, check in users table
-  $stmt = $conn->prepare("SELECT id, fullname, password FROM users WHERE email=?");
+  // Check in users table, get role
+  $stmt = $conn->prepare("SELECT id, fullname, password, role FROM users WHERE email=?");
   $stmt->bind_param("s", $email);
   $stmt->execute();
   $stmt->store_result();
-  $stmt->bind_result($id, $fullname, $hashed_password);
+  $stmt->bind_result($id, $fullname, $db_password, $role);
 
   if ($stmt->num_rows > 0) {
     $stmt->fetch();
-    if (password_verify($password, $hashed_password)) {
+    $is_admin = ($role === 'admin');
+    // Accept both hashed and plain text passwords
+    if (password_verify($password, $db_password) || $password === $db_password) {
       $_SESSION['user_id'] = $id;
       $_SESSION['user_name'] = $fullname;
-      $_SESSION['is_admin'] = false;
+      $_SESSION['is_admin'] = $is_admin;
       header("Location: index.php");
       exit();
     } else {
       $message = "Invalid Credentials!";
     }
   } else {
-    // If not found in users, check in admins table
-    $stmt->close();
-    $stmt = $conn->prepare("SELECT id, fullname, password FROM admins WHERE email=?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($id, $fullname, $hashed_password);
-    if ($stmt->num_rows > 0) {
-      $stmt->fetch();
-      if (password_verify($password, $hashed_password)) {
-        $_SESSION['user_id'] = $id;
-        $_SESSION['user_name'] = $fullname;
-        $_SESSION['is_admin'] = true;
-        header("Location: index.php");
-        exit();
-      } else {
-        $message = "Invalid Credentials!";
-      }
-    } else {
-      $message = "Invalid Credentials!";
-    }
+    $message = "Invalid Credentials!";
   }
 
   $stmt->close();
@@ -92,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               style="border:2px solid #000; background:transparent; color:#000; border-radius:2px; padding:8px 28px; margin:0; font-weight:700; cursor:pointer; transition:background 0.2s, color 0.2s, border-color 0.2s; text-transform:uppercase; letter-spacing:1px; font-size:16px; min-width:120px;"
               onclick="window.location.href='booking.php'">Book Your Stay</button>
             <div class="site-menu-toggle js-site-menu-toggle" data-aos="slide">
-              <span></span>
+              <span></span>its
               <span></span>
               <span></span>
               <span></span>
