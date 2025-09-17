@@ -70,49 +70,33 @@ INSERT INTO `users` (`id`, `fullname`, `phone`, `email`, `password`, `created_at
 (1, 'Sithija Kaveeshwara', '09644034734', 'sithija@gmail.com', '$2y$10$8DlUZAUGPsEVINo14KtNbe2cX/UUC8AqKphnmKPBughyRx2/6WTiy', '2025-09-14 16:43:32'),
 (2, 'L Saman', '09644034734', 'samn@gmail.com', '$2y$10$lV8/6StvHwY9obuazduZF.WtdhWNrvignXdiAo0Pvczcc3BHDy5fC', '2025-09-14 16:46:59');
 
---
--- Indexes for dumped tables
---
+-- --------------------------------------------------------
 
 --
--- Indexes for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- Table structure for table `contact_messages`
 --
 
---
--- AUTO_INCREMENT for table `bookings`
---
-ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+CREATE TABLE `contact_messages` (
+  `id` int(11) NOT NULL,
+  `title` varchar(10) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- AUTO_INCREMENT for table `users`
+-- Indexes for table `contact_messages`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `contact_messages`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `contact_messages`
 --
-
---
--- Constraints for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `contact_messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

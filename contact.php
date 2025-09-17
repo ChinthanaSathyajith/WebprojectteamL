@@ -1,6 +1,56 @@
 <?php
 session_start();
 
+$successMessage = '';
+$errorMessage = '';
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Include database connection
+    require_once 'db_connect.php';
+
+    // Sanitize and validate inputs
+    $title = filter_input(INPUT_POST, 'title');
+    $firstName = filter_input(INPUT_POST, 'first_name');
+    $lastName = filter_input(INPUT_POST, 'last_name');
+    $email = filter_input(INPUT_POST, 'email');
+    $message = filter_input(INPUT_POST, 'message');
+
+    $errors = [];
+
+    if (empty($title)) {
+        $errors[] = "Title is required.";
+    }
+    if (empty($firstName)) {
+        $errors[] = "First name is required.";
+    }
+    if (empty($lastName)) {
+        $errors[] = "Last name is required.";
+    }
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "A valid email is required.";
+    }
+    if (empty($message)) {
+        $errors[] = "Message is required.";
+    }
+
+    if (empty($errors)) {
+        // Prepare and bind
+        $stmt = $conn->prepare("INSERT INTO contact_messages (title, first_name, last_name, email, message) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $title, $firstName, $lastName, $email, $message);
+
+        if ($stmt->execute()) {
+            $successMessage = "Your message has been sent successfully!";
+        } else {
+            $errorMessage = "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
+        $conn->close();
+    } else {
+        $errorMessage = implode("<br>", $errors);
+    }
+}
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -156,6 +206,16 @@ session_start();
 
         <!-- Left Column: Form -->
         <div class="col-md-7" data-aos="fade-up" style="padding-right: 40px;">
+        <?php if (!empty($successMessage)): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $successMessage; ?>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty($errorMessage)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $errorMessage; ?>
+                </div>
+            <?php endif; ?>
           <!-- Heading and paragraph aligned with form margins -->
           <div style="padding-left: 30px;">
             <h2 class="mb-4"
@@ -169,13 +229,13 @@ session_start();
           </div>
 
           <!-- Form with creamy background -->
-          <form style="background: #f8f6f2; padding: 35px 30px; border-radius: 0; box-shadow: none;">
+          <form action="contact.php" method="post" style="background: #f8f6f2; padding: 35px 30px; border-radius: 0; box-shadow: none;">
             <div style="display: flex; gap: 20px; margin-bottom: 25px;">
               <div style="flex: 1; position: relative;">
                 <label
                   style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">TITLE</label>
-                <select
-                  style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; appearance: none; background: white;">
+                <select name="title"
+                  style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; appearance: none; background: white;" required>
                   <option>Mr.</option>
                   <option>Mrs.</option>
                   <option>Ms.</option>
@@ -187,8 +247,8 @@ session_start();
                 <label
                   style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">FIRST
                   NAME</label>
-                <input type="text"
-                  style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; background: white;">
+                <input type="text" name="first_name"
+                  style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; background: white;" required>
               </div>
             </div>
 
@@ -196,51 +256,32 @@ session_start();
               <label
                 style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">LAST
                 NAME</label>
-              <input type="text"
-                style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; background: white;">
+              <input type="text" name="last_name"
+                style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; background: white;" required>
             </div>
 
             <div style="margin-bottom: 25px;">
               <label
-                style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">PHONE
-                NUMBER</label>
-              <input type="text"
-                style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; background: white;">
-            </div>
-
-            <div style="margin-bottom: 25px;">
-              <label
-                style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">EMAIL
-                ADDRESS</label>
-              <input type="email"
-                style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; background: white;">
-            </div>
-
-            <div style="margin-bottom: 25px;">
-              <label
-                style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">MESSAGE</label>
-              <textarea rows="5"
-                style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; resize: vertical; background: white;"></textarea>
+                style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">EMAIL</label>
+              <input type="email" name="email"
+                style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; background: white;" required>
             </div>
 
             <div style="margin-bottom: 30px;">
               <label
-                style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">ACCEPTANCE</label>
-              <div style="display: flex; align-items: flex-start;">
-                <input type="checkbox" style="margin-right: 12px; margin-top: 3px;">
-                <span style="font-family: 'Roboto', sans-serif; color: #666; font-size: 14px; line-height: 1.5;">
-                  I have read and agree to the Privacy Policy and given consent for the above.
-                </span>
-              </div>
+                style="font-family: 'Roboto', sans-serif; color: #1a1a1a; font-weight: 500; margin-bottom: 10px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">MESSAGE</label>
+              <textarea name="message"
+                style="width: 100%; padding: 14px 15px; border: 1px solid #d0d0d0; border-radius: 2px; font-family: 'Roboto', sans-serif; color: #333; font-size: 15px; min-height: 120px; background: white;" required></textarea>
             </div>
-            <button type="submit" onmouseover="this.style.background='#a67c52'; this.style.color='white'"
-              onmouseout="this.style.background='transparent'; this.style.color='#a67c52'"
-              style="background: transparent; color: #a67c52; font-family: 'Roboto', sans-serif; font-weight: 500; padding: 14px 35px; border: 2px solid #a67c52; border-radius: 2px; cursor: pointer; font-size: 15px; letter-spacing: 0.5px; text-transform: uppercase; transition: all 0.3s ease;">Send
-              Message</button>
+
+            <button type="submit"
+              style="background: #c5a880; color: white; padding: 15px 30px; border: none; border-radius: 2px; font-family: 'Roboto', sans-serif; font-weight: 500; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: background 0.3s;">
+              Send Message
+            </button>
           </form>
         </div>
 
-        <!-- Right Column: Contact Details with Border -->
+        <!-- Right Column: Contact Info -->
         <div class="col-md-4" data-aos="fade-up" data-aos-delay="100"
           style="border: 1px solid #e1e1e1; padding: 30px 25px; height: fit-content; background:#f9f6f2;">
           <h2 class="mb-4"
