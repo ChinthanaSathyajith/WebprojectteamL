@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
+  // First, check in users table
   $stmt = $conn->prepare("SELECT id, fullname, password FROM users WHERE email=?");
   $stmt->bind_param("s", $email);
   $stmt->execute();
@@ -24,13 +25,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (password_verify($password, $hashed_password)) {
       $_SESSION['user_id'] = $id;
       $_SESSION['user_name'] = $fullname;
+      $_SESSION['is_admin'] = false;
       header("Location: index.php");
       exit();
     } else {
       $message = "Invalid Credentials!";
     }
   } else {
-    $message = "Invalid Credentials!";
+    // If not found in users, check in admins table
+    $stmt->close();
+    $stmt = $conn->prepare("SELECT id, fullname, password FROM admins WHERE email=?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($id, $fullname, $hashed_password);
+    if ($stmt->num_rows > 0) {
+      $stmt->fetch();
+      if (password_verify($password, $hashed_password)) {
+        $_SESSION['user_id'] = $id;
+        $_SESSION['user_name'] = $fullname;
+        $_SESSION['is_admin'] = true;
+        header("Location: index.php");
+        exit();
+      } else {
+        $message = "Invalid Credentials!";
+      }
+    } else {
+      $message = "Invalid Credentials!";
+    }
   }
 
   $stmt->close();
@@ -90,9 +112,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <li><a href="booking.php">Rooms</a></li>
                     <li><a href="aboutus.php">About Us</a></li>
                     <li><a href="events.php">Gallery</a></li>
-                    <li><a href="feedback.php">Feedbacks</a></li>                  
+                    <li><a href="feedback.php">Feedbacks</a></li>
                     <li><a href="contact.php">Contact Us</a></li>
                     <?php
+                    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+                      echo '<li><a href="admin.php">Admin Page</a></li>';
+                    }
                     if (isset($_SESSION['user_id'])) {
                       echo (' <li><a href="logout.php">Logout</a></li>');
                     } else {

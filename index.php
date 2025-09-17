@@ -65,11 +65,11 @@ session_start();
                     <li><a href="aboutus.php">About Us</a></li>
                     <li><a href="events.php">Gallery</a></li>
                     <li><a href="feedback.php">Feedbacks</a></li>
-
                     <li><a href="contact.php">Contact Us</a></li>
-
-
                     <?php
+                    if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+                      echo '<li><a href="admin.php">Admin Page</a></li>';
+                    }
                     if (isset($_SESSION['user_id'])) {
                       echo (' <li><a href="logout.php">Logout</a></li>');
                     } else {
