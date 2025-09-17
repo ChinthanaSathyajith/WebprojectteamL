@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $check_in = $_POST['check_in'];
   $check_out = $_POST['check_out'];
 
-  $stmt = $conn->prepare("INSERT INTO bookings (user_id, full_name, email, phone, room_type, check_in, check_out) VALUES (?, ?, ?, ?, ?, ?, ?)");
-  $stmt->bind_param("issssss", $user_id, $full_name, $email, $phone, $room_type, $check_in, $check_out);
+    $stmt = $conn->prepare("INSERT INTO booking (user_id, full_name, email, phone, room_type, check_in, check_out, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->bind_param("issssss", $user_id, $full_name, $email, $phone, $room_type, $check_in, $check_out);
 
   if ($stmt->execute()) {
     $message = "Booking successful!";

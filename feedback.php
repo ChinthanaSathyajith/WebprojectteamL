@@ -1,14 +1,23 @@
 <?php
 session_start();
+
 require_once 'db_connect.php';
 
+// Handle feedback deletion
+if (isset($_POST['delete_feedback']) && isset($_POST['feedback_id']) && isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+  $feedback_id = intval($_POST['feedback_id']);
+  $stmt = $conn->prepare("DELETE FROM feedback WHERE id = ?");
+  $stmt->bind_param("i", $feedback_id);
+  $stmt->execute();
+  $stmt->close();
+}
 
-// Fetch all feedback
+// Fetch all feedback (include id for deletion)
 $result = $conn->query("
-    SELECT f.feedback_text, f.created_at, u.fullname 
-    FROM feedback f
-    JOIN users u ON f.user_id = u.id
-    ORDER BY f.created_at DESC
+  SELECT f.id, f.feedback_text, f.created_at, u.fullname 
+  FROM feedback f
+  JOIN users u ON f.user_id = u.id
+  ORDER BY f.created_at DESC
 ");
 $feedbacks = $result->fetch_all(MYSQLI_ASSOC);
 $conn->close();
@@ -204,15 +213,21 @@ $conn->close();
         <?php if (empty($feedbacks)): ?>
             <p class="text-center text-muted">No feedback yet. Be the first to share your thoughts!</p>
         <?php else: ?>
-            <?php foreach ($feedbacks as $fb): ?>
-                <div class="feedback-card">
-                    <p class="mb-2"><?php echo htmlspecialchars($fb['feedback_text']); ?></p>
-                    <div class="d-flex justify-content-between">
-                        <span class="feedback-author"><?php echo htmlspecialchars($fb['fullname']); ?></span>
-                        <span class="feedback-date"><?php echo $fb['created_at']; ?></span>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+      <?php foreach ($feedbacks as $fb): ?>
+        <div class="feedback-card">
+          <p class="mb-2"><?php echo htmlspecialchars($fb['feedback_text']); ?></p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="feedback-author"><?php echo htmlspecialchars($fb['fullname']); ?></span>
+            <span class="feedback-date"><?php echo $fb['created_at']; ?></span>
+            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+              <form method="POST" style="display:inline; margin-left:10px;">
+                <input type="hidden" name="feedback_id" value="<?php echo $fb['id']; ?>">
+                <button type="submit" name="delete_feedback" class="btn btn-danger btn-sm" onclick="return confirm('Delete this feedback?');">Delete</button>
+              </form>
+            <?php endif; ?>
+          </div>
+        </div>
+      <?php endforeach; ?>
         <?php endif; ?>
 
         <!-- Post Feedback Button -->
